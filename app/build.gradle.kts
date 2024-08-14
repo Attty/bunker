@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -51,7 +54,12 @@ android {
 
 dependencies {
 
-    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // Hilt
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
+
+    //Navigation
+    implementation (libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
