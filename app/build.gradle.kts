@@ -1,3 +1,5 @@
+import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -10,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.example.bunker"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.bunker"
@@ -52,6 +54,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
@@ -63,7 +66,9 @@ dependencies {
     kapt (libs.hilt.compiler)
 
     //Navigation
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation(libs.navigation.compose)
+
 
     implementation(libs.kotlinx.serialization.json)
 
@@ -82,4 +87,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
