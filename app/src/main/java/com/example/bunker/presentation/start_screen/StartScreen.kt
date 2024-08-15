@@ -20,11 +20,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.bunker.NewgameScreenObj
 import com.example.bunker.R
+import com.example.bunker.StartScreenObj
+import com.example.bunker.presentation.newgame_screen.NewgameScreen
 
-@Preview(showBackground = true)
 @Composable
-fun StartScreen(modifier: Modifier = Modifier) {
+fun StartScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     Image(
         painterResource(id = R.drawable.start_screen), contentDescription = "background",
         modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillHeight
@@ -65,7 +71,7 @@ fun StartScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(width = 222.dp, height = 66.dp)
                     .padding(bottom = 4.dp),
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(NewgameScreenObj) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = Color.Red

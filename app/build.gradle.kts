@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 
+    alias(libs.plugins.kotlin.serialization)
+
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
@@ -54,12 +56,16 @@ android {
 
 dependencies {
 
+    //Gson
+    implementation ("com.google.code.gson:gson:2.11.0")
     // Hilt
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)
 
     //Navigation
-    implementation (libs.androidx.hilt.navigation.compose)
+    implementation(libs.navigation.compose)
+
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

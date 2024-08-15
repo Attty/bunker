@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
@@ -43,13 +44,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.bunker.StartScreenObj
 import com.example.bunker.ui.theme.Gray
 
 @SuppressLint("MutableCollectionMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun NewgameScreen(modifier: Modifier = Modifier) {
+fun NewgameScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     var list by remember {
         mutableStateOf(mutableListOf("Влад", "Соня", "add"))
     }
@@ -84,11 +90,13 @@ fun NewgameScreen(modifier: Modifier = Modifier) {
                     )
                 },
                 navigationIcon = {
-                    Icon(
-                        modifier = Modifier.padding(8.dp, end = 16.dp),
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "back"
-                    )
+                    IconButton(onClick = { navController.navigate(StartScreenObj) }) {
+                        Icon(
+                            modifier = Modifier.padding(8.dp, end = 16.dp),
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "back"
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.Black,
