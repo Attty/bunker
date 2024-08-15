@@ -42,6 +42,13 @@ class NewgameScreenViewmodel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun removeLastElement(): MutableList<String> {
+        return if (_state.value.list.isNotEmpty()) {
+            _state.value.list.subList(0, _state.value.list.size - 1).toMutableList()
+        } else {
+            _state.value.list.toMutableList()
+        }
+    }
 
 
 

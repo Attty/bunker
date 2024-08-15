@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.bunker.DistributeAttributesScreenObj
 import com.example.bunker.StartScreenObj
 import com.example.bunker.presentation.newgame_screen.viewmodel.NewgameScreenViewmodel
 import com.example.bunker.ui.theme.Gray
@@ -92,7 +93,7 @@ fun NewgameScreen(
         },
         bottomBar = {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(DistributeAttributesScreenObj(viewmodel.removeLastElement())) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
