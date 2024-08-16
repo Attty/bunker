@@ -1,6 +1,12 @@
 package com.example.bunker.presentation.newgame_screen.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -148,38 +154,39 @@ fun NewgameScreen(
                         )
                     }
                 } else {
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        BasicTextField(
+                        Row(
                             modifier = Modifier
-                                .focusRequester(focusRequester),
-                            value = item, onValueChange = {
-                                viewmodel.updateName(index, it)
-                            },
-                            readOnly = false,
-                            textStyle = TextStyle.Default,
-                            singleLine = true,
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    focusManager.clearFocus()
-                                }
-                            )
-                        )
-                        if (state.list.size > 3) {
-                            IconButton(onClick = { viewmodel.removeItem(index) }) {
-                                Icon(
-                                    imageVector = Icons.Default.Clear,
-                                    contentDescription = "remove"
+                                .fillMaxWidth()
+                                .height(64.dp)
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            BasicTextField(
+                                modifier = Modifier
+                                    .focusRequester(focusRequester),
+                                value = item, onValueChange = {
+                                    viewmodel.updateName(index, it)
+                                },
+                                readOnly = false,
+                                textStyle = TextStyle.Default,
+                                singleLine = true,
+                                keyboardActions = KeyboardActions(
+                                    onDone = {
+                                        focusManager.clearFocus()
+                                    }
                                 )
+                            )
+                            if (state.list.size > 3) {
+                                IconButton(onClick = { viewmodel.removeItem(index) }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Clear,
+                                        contentDescription = "remove"
+                                    )
+                                }
                             }
                         }
-                    }
+
                 }
             }
         }
