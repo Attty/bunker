@@ -24,7 +24,24 @@ data class AttributesScreenState(
     val indexPlayer: Int = 0,
     val isLoopEnd: Boolean = false,
     val maxLoops: Int = 0,
+    val maxAttributesToChoose: Int = 0,
+    val show: Boolean = false,
     val currentLoop: Int = 1,
-    val isGameFinished: Boolean = false
+    val isGameFinished: Boolean = false,
+    val kickedPlayer: Model = Model(
+        name = "",
+        virtualName = "",
+        age = 0,
+        sex = "",
+        job = "",
+        body = "",
+        humanTrait = "",
+        health = "",
+        hobby = "",
+        phobia = "",
+        baggage = "",
+        additionalInfo = "",
+        isDead = false
+    )
 
 )

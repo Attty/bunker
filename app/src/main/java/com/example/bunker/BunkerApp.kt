@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.bunker.presentation.distribute_attributes_screen.screen.DistributeAttributesScreen
+import com.example.bunker.presentation.distribute_attributes_screen.screen.MainGameScreen
 import com.example.bunker.presentation.newgame_screen.screen.NewgameScreen
 import com.example.bunker.presentation.start_screen.StartScreen
 import kotlinx.serialization.Serializable
@@ -25,7 +25,7 @@ fun BunkerApp(modifier: Modifier = Modifier) {
         composable<DistributeAttributesScreenObj> {
             val args = it.toRoute<DistributeAttributesScreenObj>()
 
-            DistributeAttributesScreen(navController = navController, list = args.list)
+            MainGameScreen(navController = navController, list = args.list)
         }
     }
 

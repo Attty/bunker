@@ -1,9 +1,10 @@
 package com.example.bunker.domain
 
 data class Visibility(
+    val isShowedVirtualName: Boolean = false,
     val isShowedSex: Boolean = false,
-    val isShowedAge: Boolean = false,
     val isShowedJob: Boolean = false,
+    val isShowedAge: Boolean = false,
     val isShowedBody: Boolean = false,
     val isShowedHumanTrait: Boolean = false,
     val isShowedHealth: Boolean = false,
@@ -13,9 +14,10 @@ data class Visibility(
     val isShowedAdditionalInfo: Boolean = false
 )
 data class Enabled(
-    val isEnabledSex: Boolean = true,
+    val isEnabledVirtualName: Boolean = false,
+    val isEnabledSex: Boolean = false,
+    val isEnabledJob: Boolean = false,
     val isEnabledAge: Boolean = true,
-    val isEnabledJob: Boolean = true,
     val isEnabledBody: Boolean = true,
     val isEnabledHumanTrait: Boolean = true,
     val isEnabledHealth: Boolean = true,

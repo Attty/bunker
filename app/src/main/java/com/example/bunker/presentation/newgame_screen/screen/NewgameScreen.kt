@@ -180,7 +180,7 @@ fun NewgameScreen(
                     TextField(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, top = 8.dp, end = 16.dp)
+                            .padding(start = 20.dp, top = 8.dp, end = 20.dp)
                             .focusRequester(focusRequester),
                         textStyle = TextStyle(fontWeight = FontWeight.W700),
                         singleLine = true,

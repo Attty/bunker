@@ -10,11 +10,13 @@ import com.example.bunker.presentation.distribute_attributes_screen.state.Attrib
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class AttributesScreenViewmodel @Inject constructor() : ViewModel() {
     private val _state = mutableStateOf(AttributesScreenState())
     val state: State<AttributesScreenState> = _state
+
     fun DistributeAttributes(list: List<String>) {
         _state.value = state.value.copy(
             list = list.map { name ->
@@ -64,35 +66,191 @@ class AttributesScreenViewmodel @Inject constructor() : ViewModel() {
         )
     }
 
+    fun CalculationMaxAttributesToChoose() {
+        when (_state.value.maxLoops) {
+            1 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+                }
+            }
+            2 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    2 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+                }
+            }
+
+            3 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    2 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+
+                    3 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+                }
+            }
+
+            4 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    2 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+
+                    3 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+
+                    4 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+                }
+
+            }
+
+            5 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    2 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 2
+                        )
+                    }
+
+                    3 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    4 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    5 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+                }
+            }
+
+            6 -> {
+                when (_state.value.currentLoop) {
+                    1 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    2 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    3 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    4 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    5 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+
+                    6 -> {
+                        _state.value = state.value.copy(
+                            maxAttributesToChoose = 1
+                        )
+                    }
+                }
+            }
+        }
+        println(_state.value.maxAttributesToChoose)
+    }
+
     fun CalculationMaxLoops(playerCount: Int) {
         _state.value = state.value.copy(
-            maxLoops = playerCount / 2
+            maxLoops = (playerCount.toFloat() / 2).roundToInt()
         )
     }
 
     fun ShowFirstPerson() {
+
         val currentState = _state.value
-        var newIndex = 0
+        val alivePlayers = filterAlivePlayers(currentState.list)
 
-        // Знайти першого живого гравця
-        while (newIndex < currentState.list.size && currentState.list[newIndex].isDead) {
-            newIndex++
-        }
-
-        if (newIndex < currentState.list.size) {
-            // Якщо знайдено живого гравця, оновити стан
+        if (alivePlayers.isNotEmpty()) {
+            // Якщо знайдено живих гравців, оновити стан на першого з них
             _state.value = currentState.copy(
-                currentPlayer = currentState.list[newIndex],
-                indexPlayer = newIndex
+                currentPlayer = alivePlayers.first(),
+                indexPlayer = currentState.list.indexOf(alivePlayers.first())
             )
         } else {
             // Якщо всі гравці мертві, можна встановити, що цикл завершено
             _state.value = currentState.copy(
-                isLoopEnd = true
+                isLoopEnd = true,
             )
         }
     }
 
+    fun Show() {
+        _state.value = state.value.copy(
+            show = !_state.value.show
+        )
+    }
 
     fun ShowAttributes(showedAttributes: Visibility) {
         _state.value = state.value.copy(
@@ -105,22 +263,20 @@ class AttributesScreenViewmodel @Inject constructor() : ViewModel() {
     fun ShowNextPlayer(currentPlayer: Model) {
         val currentState = _state.value
         val updatedList = currentState.list.toMutableList().apply {
-            this[currentState.indexPlayer] = currentPlayer // новий об'єкт, який потрібно вставити
+            this[currentState.indexPlayer] =
+                currentPlayer // новий об'єкт, який потрібно вставити
         }
 
-        var newIndex = currentState.indexPlayer
+        val alivePlayers = filterAlivePlayers(updatedList)
+        val currentIndex = alivePlayers.indexOfFirst { it == currentPlayer }
 
-        // Переміщення до наступного гравця, якщо поточний гравець мертвий
-        while (newIndex < updatedList.size - 1 && updatedList[newIndex].isDead) {
-            newIndex++
-        }
-
-        if (newIndex < updatedList.size - 1) {
-            newIndex++ // Переміщення до наступного живого гравця
+        if (currentIndex != -1 && currentIndex < alivePlayers.size - 1) {
+            val nextPlayer = alivePlayers[currentIndex + 1]
+            val newIndex = updatedList.indexOf(nextPlayer)
 
             _state.value = currentState.copy(
                 list = updatedList,
-                currentPlayer = updatedList[newIndex],
+                currentPlayer = nextPlayer,
                 indexPlayer = newIndex
             )
         } else {
@@ -129,6 +285,29 @@ class AttributesScreenViewmodel @Inject constructor() : ViewModel() {
                 isLoopEnd = true
             )
         }
+
+    }
+
+    fun LoopEnd() {
+        _state.value = state.value.copy(
+            isLoopEnd = false,
+            kickedPlayer = Model(
+                name = "",
+                virtualName = "",
+                age = 0,
+                sex = "",
+                job = "",
+                body = "",
+                humanTrait = "",
+                health = "",
+                hobby = "",
+                phobia = "",
+                baggage = "",
+                additionalInfo = "",
+                isDead = false
+            )
+        )
+        CalculationMaxAttributesToChoose()
     }
 
     fun NewLoop(
@@ -142,30 +321,31 @@ class AttributesScreenViewmodel @Inject constructor() : ViewModel() {
                 player
             }
         }
-
         if (currentState.currentLoop != currentState.maxLoops) {
             _state.value = currentState.copy(
                 list = updatedList,
                 indexPlayer = 0,
-                isLoopEnd = false,
+                kickedPlayer = personRemoved,
                 currentLoop = currentState.currentLoop + 1
             )
             ShowFirstPerson()
         } else if (currentState.currentLoop == currentState.maxLoops) {
             _state.value = currentState.copy(
                 list = updatedList,
-                indexPlayer = 0,
                 isLoopEnd = false,
-                currentLoop = currentState.currentLoop + 1
+                isGameFinished = true
             )
         }
     }
 
 
-    fun filterAlivePlayers(players: List<Model>): List<Model> {
+    fun filterAlivePlayers(
+        players: List<Model>
+
+    )
+            : List<Model> {
         return players.filter { !it.isDead }
     }
-
 
 
 }
