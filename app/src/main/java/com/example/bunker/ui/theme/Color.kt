@@ -2,13 +2,13 @@ package com.example.bunker.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val NewgameScreenBG = Color(0xFF333235)
+val TextFieldBG = Color(0xFF1A191B)
+val Pink80 = Color(0xFF1E1F22)
 
-val Purple40 = Color(0xFF6650a4)
+val CustomRed = Color(0xFF910000)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val Gray = Color(0xFF2E2B2C)
+val Gray = Color(0xFF34373A)
 
