@@ -14,15 +14,9 @@ class NewgameScreenViewmodel @Inject constructor() : ViewModel() {
     private val _state = mutableStateOf(NewgameScreenState())
     val state: State<NewgameScreenState> = _state
 
-    fun addItemBeforeLast(newItem: String) {
+    fun addItem(newItem: String) {
         _state.value = state.value.copy(
-            list = if (state.value.list.size > 1) {
-                // Додаємо елемент перед останнім
-                state.value.list.dropLast(1) + newItem + state.value.list.last()
-            } else {
-                // Якщо в списку лише один елемент або список порожній
-                state.value.list + newItem
-            }
+            list = state.value.list + newItem
         )
     }
 
@@ -33,6 +27,7 @@ class NewgameScreenViewmodel @Inject constructor() : ViewModel() {
             }
         )
     }
+
     fun removeItem(index: Int) {
         if (index in state.value.list.indices) {
             val newList = state.value.list.toMutableList()
@@ -41,15 +36,4 @@ class NewgameScreenViewmodel @Inject constructor() : ViewModel() {
             _state.value = state.value.copy(list = newList)
         }
     }
-
-    fun removeLastElement(): MutableList<String> {
-        return if (_state.value.list.isNotEmpty()) {
-            _state.value.list.subList(0, _state.value.list.size - 1).toMutableList()
-        } else {
-            _state.value.list.toMutableList()
-        }
-    }
-
-
-
 }
