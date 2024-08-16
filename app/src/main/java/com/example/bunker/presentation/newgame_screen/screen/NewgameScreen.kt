@@ -226,9 +226,7 @@ fun NewgameScreen(
                             unfocusedIndicatorColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
                             cursorColor = CustomRed
-                        ),
-
-
+                        )
                         )
                 }
             }
