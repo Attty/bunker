@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bunker.NewgameScreenObj
 import com.example.bunker.R
+import com.example.bunker.ui.theme.CustomRed
 
 @Composable
 fun StartScreen(
@@ -52,7 +53,7 @@ fun StartScreen(
                 enabled = false,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
-                    contentColor = Color.Red,
+                    contentColor = CustomRed,
                     disabledContentColor = Color.Gray.copy(alpha = 0.5f),
                     disabledContainerColor = Color.DarkGray.copy(alpha = 0.5f)
                 ),
@@ -71,7 +72,7 @@ fun StartScreen(
                 onClick = { navController.navigate(NewgameScreenObj) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
-                    contentColor = Color.Red
+                    contentColor = CustomRed
                 )
             ) {
                 Text(
@@ -88,7 +89,7 @@ fun StartScreen(
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
-                    contentColor = Color.Red
+                    contentColor = CustomRed
                 )
             ) {
                 Text(

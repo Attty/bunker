@@ -182,6 +182,7 @@ fun NewgameScreen(
                             .fillMaxWidth()
                             .padding(start = 16.dp, top = 8.dp, end = 16.dp)
                             .focusRequester(focusRequester),
+                        textStyle = TextStyle(fontWeight = FontWeight.W700),
                         singleLine = true,
                         value = item,
                         onValueChange = {
