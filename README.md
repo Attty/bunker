@@ -1,4 +1,4 @@
-# Bunker
+# Bunker (beta)
 
 Bunker is an exciting game where players compete for a spot in a bunker to survive an apocalypse. Players must use their skills, persuasion, and strategy to convince others that they deserve to stay in the bunker.
 
